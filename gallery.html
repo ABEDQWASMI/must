@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - ABED Thailand Adventure</title>
+
+    <!-- External Libraries -->
+    <script defer src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script defer src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script defer src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background: linear-gradient(to bottom, #000000, #1a1a1a);
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .gallery-item {
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-gap: 20px;
+            grid-auto-flow: dense;
+        }
+
+        .masonry-grid .gallery-item:nth-child(4n) {
+            grid-row: span 2;
+        }
+
+        .masonry-grid .gallery-item:nth-child(8n) {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .masonry-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- Lightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+    <script type="text/babel">
+        // Define translations
+        const translations = {
+            en: {
+                home: "Home",
+                book: "Book",
+                gallery: "Gallery",
+                guide: "Guide",
+                more: "More",
+                planTrip: "Plan your trip",
+                welcome: "Welcome to ABED Thailand Adventure",
+                welcomeDesc: "Explore the beauty of Thailand with our exclusive adventure packages.",
+                about: "About Us",
+                contact: "Contact",
+                faq: "FAQ",
+                newsletter: {
+                    title: "Special Offers",
+                    description: "Subscribe for exclusive Thailand travel deals and job opportunities in Southeast Asia"
+                },
+                form: {
+                    phone: "Phone",
+                    dob: "Date of Birth",
+                    familyName: "Family Name",
+                    firstName: "First Name",
+                    city: "City",
+                    email: "Email",
+                    send: "Send",
+                    terms: "I agree to the Terms & Conditions and Privacy Policy",
+                    offers: "I would like to receive offers from ABED Thailand via email"
+                },
+                footer: {
+                    newsletter: {
+                        title: "Special Offers",
+                        description: "Subscribe for exclusive Thailand travel deals"
+                    },
+                    followMe: "Follow Me",
+                    contactUs: "Contact Us",
+                    sendUs: "Send Message",
+                    importantLinks: "Important Links",
+                    cookies: "Cookie Policy",
+                    consumer: "Consumer Protection",
+                    terms: "Terms & Conditions",
+                    company: "Company Profile",
+                    planTrip: "Plan Your Trip",
+                    visa: "Thailand Visa",
+                    flight: "Book Flights",
+                    transport: "Local Transport",
+                    accommodation: "Book Hotels",
+                    adventures: "Book Adventures",
+                    gear: "Travel Essentials",
+                    pages: "Quick Links",
+                    book: "Book Now",
+                    plan: "Trip Planning",
+                    faq: "FAQ",
+                    contact: "Contact",
+                    about: "About Us",
+                    costs: "Trip Costs",
+                    copyright: "ABED Thailand © All rights reserved",
+                    photoCredit: "Photos by Thailand Tourism Board"
+                }
+            },
+            ar: {
+                // Arabic translations (same structure as English)
+                home: "الرئيسية",
+                book: "حجز",
+                gallery: "معرض الصور",
+                guide: "دليل",
+                more: "المزيد",
+                // ... rest of Arabic translations
+            }
+        };
+
+        // Language Context and Provider from index.html
+        const LanguageContext = React.createContext({
+            language: 'en',
+            setLanguage: () => {},
+            translations: translations.en
+        });
+
+        const LanguageProvider = ({ children }) => {
+            const [language, setLanguage] = React.useState(() => {
+                return localStorage.getItem('preferredLanguage') || 'en'
+            });
+
+            React.useEffect(() => {
+                localStorage.setItem('preferredLanguage', language);
+            }, [language]);
+
+            const value = {
+                language,
+                setLanguage,
+                translations: translations[language]
+            };
+
+            return (
+                <LanguageContext.Provider value={value}>
+                    {children}
+                </LanguageContext.Provider>
+            );
+        };
+
+        // Navbar Component
+        const Navbar = () => {
+            const { language, setLanguage } = React.useContext(LanguageContext);
+            const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+            const [showDropdown, setShowDropdown] = React.useState(false);
+            const [showMoreMenu, setShowMoreMenu] = React.useState(false);
+            const [activeSection, setActiveSection] = React.useState('gallery');
+
+            const currentTranslations = translations[language];
+
+            const handleNavClick = (section, event) => {
+                event.preventDefault();
+                
+                // Handle navigation to different pages
+                switch(section) {
+                    case 'home':
+                        window.location.href = 'index.html';
+                        break;
+                    case 'book':
+                        window.location.href = 'booking.html';
+                        break;
+                    case 'gallery':
+                        window.location.href = 'gallery.html';
+                        break;
+                    case 'about':
+                        window.location.href = 'aboutus.html';
+                        break;
+                    case 'guide':
+                        // If you have a guide page
+                        window.location.href = 'guide.html';
+                        break;
+                    default:
+                        // For sections within the same page
+                        setActiveSection(section);
+                        const element = document.getElementById(section);
+                        if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                }
+                
+                setShowMobileMenu(false);
+            };
+
+            return (
+                <nav className="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+                    <div className="flex items-center justify-between w-full p-4 mx-auto">
+                        {/* Logo Section */}
+                        <a 
+                            href="index.html" 
+                            className="flex items-center space-x-2 cursor-pointer"
+                            onClick={(e) => handleNavClick('home', e)}
+                        >
+                            <img src="logo.jpeg" alt="Logo" className="h-8 w-8 md:h-12 md:w-12" />
+                            <div className="text-white text-lg md:text-2xl font-bold">ABED</div>
+                            <div className="text-white text-xs md:text-sm">Thailand</div>
+                        </a>
+
+                        {/* Rest of your existing Navbar code */}
+                    </div>
+                </nav>
+            );
+        };
+
+        // Footer Component
+        const Footer = () => {
+            const { language, setLanguage, translations } = React.useContext(LanguageContext);
+            const defaultTranslations = {
+                footer: {
+                    followMe: "Follow Me",
+                    contactUs: "Contact Us",
+                    sendUs: "Send Message",
+                    importantLinks: "Important Links",
+                    cookies: "Cookie Policy",
+                    consumer: "Consumer Protection",
+                    terms: "Terms & Conditions",
+                    company: "Company Profile",
+                    planTrip: "Plan Your Trip",
+                    visa: "Thailand Visa",
+                    flight: "Book Flights",
+                    transport: "Local Transport",
+                    accommodation: "Book Hotels",
+                    adventures: "Book Adventures",
+                    gear: "Travel Essentials",
+                    pages: "Quick Links",
+                    book: "Book Now",
+                    plan: "Trip Planning",
+                    faq: "FAQ",
+                    contact: "Contact",
+                    about: "About Us",
+                    costs: "Trip Costs",
+                    copyright: "© 2024 All rights reserved",
+                    photoCredit: "Photos by Thailand Tourism Board",
+                    newsletter: {
+                        title: "Special Offers",
+                        description: "Subscribe for exclusive Thailand travel deals"
+                    }
+                },
+                form: {
+                    phone: "Phone",
+                    dob: "Date of Birth",
+                    familyName: "Family Name",
+                    firstName: "First Name",
+                    city: "City",
+                    email: "Email",
+                    send: "Send",
+                    terms: "I agree to the Terms & Conditions",
+                    offers: "I want to receive offers"
+                },
+                home: "Home",
+                book: "Book",
+                gallery: "Gallery",
+                about: "About"
+            };
+
+            const currentTranslations = translations || defaultTranslations;
+            const footer = currentTranslations.footer || defaultTranslations.footer;
+
+            return (
+                <footer className="w-full bg-black py-12 px-4">
+                    <div className="max-w-7xl mx-auto">
+                        {/* Newsletter Form Section */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                            <div className="flex flex-col items-center space-y-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                                    <input type="text" placeholder={currentTranslations.form?.phone || "Phone"} className="bg-gray-800/50 text-white p-2 rounded-full" />
+                                    <input type="text" placeholder={currentTranslations.form?.dob || "Date of Birth"} className="bg-gray-800/50 text-white p-2 rounded-full" />
+                                    <input type="text" placeholder={currentTranslations.form?.familyName || "Family Name"} className="bg-gray-800/50 text-white p-2 rounded-full" />
+                                    <input type="text" placeholder={currentTranslations.form?.firstName || "First Name"} className="bg-gray-800/50 text-white p-2 rounded-full" />
+                                    <input type="text" placeholder={currentTranslations.form?.city || "City"} className="bg-gray-800/50 text-white p-2 rounded-full" />
+                                    <input type="email" placeholder={currentTranslations.form?.email || "Email"} className="bg-gray-800/50 text-white p-2 rounded-full" />
+                                </div>
+                                <div className="flex flex-col space-y-4 w-full">
+                                    <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700">
+                                        {currentTranslations.form?.send || "Send"}
+                                    </button>
+                                    <label className="flex items-center space-x-2 text-sm">
+                                        <input type="checkbox" className="form-checkbox" />
+                                        <span>{currentTranslations.form?.terms || "I agree to the Terms & Conditions"}</span>
+                                    </label>
+                                    <label className="flex items-center space-x-2 text-sm">
+                                        <input type="radio" name="option" className="form-radio" />
+                                        <span>{currentTranslations.form?.offers || "I want to receive offers"}</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col items-center md:items-end justify-center text-right">
+                                <h2 className="text-xl font-bold mb-4">{footer.newsletter.title}</h2>
+                                <p className="text-gray-300">{footer.newsletter.description}</p>
+                            </div>
+                        </div>
+
+                        {/* Main Footer Links */}
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
+                            {/* Follow me */}
+                            <div className="flex flex-col items-center md:items-start space-y-4">
+                                <h3 className="text-lg font-bold">{footer.followMe}</h3>
+                                <div className="flex space-x-4">
+                                    <a href="#" className="text-white hover:text-gray-300">
+                                        <i className="fab fa-instagram text-xl"></i>
+                                    </a>
+                                    <a href="#" className="text-white hover:text-gray-300">
+                                        <i className="fab fa-facebook text-xl"></i>
+                                    </a>
+                                    <a href="#" className="text-white hover:text-gray-300">
+                                        <i className="fab fa-youtube text-xl"></i>
+                                    </a>
+                                    <a href="#" className="text-white hover:text-gray-300">
+                                        <i className="fab fa-tiktok text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Contact us */}
+                            <div className="flex flex-col items-center md:items-start space-y-4">
+                                <h3 className="text-lg font-bold">{footer.contactUs}</h3>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.sendUs}</a>
+                            </div>
+
+                            {/* Important Links */}
+                            <div className="flex flex-col items-center md:items-start space-y-2">
+                                <h3 className="text-lg font-bold">{footer.importantLinks}</h3>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.cookies}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.consumer}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.terms}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.company}</a>
+                            </div>
+
+                            {/* Plan your trip */}
+                            <div className="flex flex-col items-center md:items-start space-y-2">
+                                <h3 className="text-lg font-bold">{footer.planTrip}</h3>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.visa}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.flight}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.transport}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.accommodation}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.adventures}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.gear}</a>
+                            </div>
+
+                            {/* Home Pages */}
+                            <div className="flex flex-col items-center md:items-start space-y-2">
+                                <h3 className="text-lg font-bold">{footer.pages}</h3>
+                                <a href="index.html" className="text-gray-300 hover:text-white">{currentTranslations.home || "Home"}</a>
+                                <a href="booking.html" className="text-gray-300 hover:text-white">{currentTranslations.book || "Book"}</a>
+                                <a href="gallery.html" className="text-gray-300 hover:text-white">{currentTranslations.gallery || "Gallery"}</a>
+                                <a href="aboutus.html" className="text-gray-300 hover:text-white">{currentTranslations.about || "About"}</a>
+                            </div> 
+                        </div>
+
+                        {/* Logo and Copyright */}
+                        <div className="border-t border-gray-800 pt-8 mt-8">
+                            <div className="flex flex-col items-center space-y-4">
+                                <img src="logo.jpeg" alt="ABED Thailand" className="h-16" />
+                                <p className="text-gray-400">{footer.copyright}</p>
+                                <p className="text-gray-400">{footer.photoCredit}</p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        const Gallery = () => {
+            const { language } = React.useContext(LanguageContext);
+            const [activeFilter, setActiveFilter] = React.useState('all');
+            const [loading, setLoading] = React.useState(true);
+
+            const galleryItems = [
+                {
+                    id: 1,
+                    category: 'nature',
+                    src: "photos/78f77606-fcdb-4753-8b50-a26ffea255d3.jpeg",
+                    title: language === 'ar' ? "شاطئ جميل" : "Beautiful Beach",
+                    description: language === 'ar' ? "استمتع بالشواطئ النقية في تايلاند" : "Experience the pristine beaches of Thailand"
+                },
+                {
+                    id: 2,
+                    category: 'culture',
+                    src: "photos/27178687-478e-456d-aa0a-18c8e749c6db.jpeg",
+                    title: language === 'ar' ? "زيارة المعبد" : "Temple Visit",
+                    description: language === 'ar' ? "استكشف المعابد التايلاندية القديمة" : "Explore ancient Thai temples"
+                },
+                {
+                    id: 3,
+                    category: 'food',
+                    src: "photos/89c21592-ee2d-4518-a400-5ce6e1258910.jpeg",
+                    title: language === 'ar' ? "المطبخ التايلاندي" : "Thai Cuisine",
+                    description: language === 'ar' ? "تذوق الأطباق التايلاندية الأصيلة" : "Savor authentic Thai dishes"
+                },
+                {
+                    id: 4,
+                    category: 'adventure',
+                    src: "photos/bea17abf-8c2e-4d2b-b342-18089b0b4db2.jpeg",
+                    title: language === 'ar' ? "الأنشطة المائية" : "Water Activities",
+                    description: language === 'ar' ? "أنشطة ومغامرات مائية مثيرة" : "Exciting water sports and adventures"
+                },
+                {
+                    id: 5,
+                    category: 'nature',
+                    src: "photos/0f05103e-1b82-4ec0-806c-9e1131eee05e.jpeg",
+                    title: language === 'ar' ? "جنة الجزيرة" : "Island Paradise",
+                    description: language === 'ar' ? "اكتشف الجزر الخفية" : "Discover hidden island gems"
+                },
+                {
+                    id: 6,
+                    category: 'culture',
+                    src: "photos/d64e328a-f106-4e91-8e78-e84f4a03ed94.jpeg",
+                    title: language === 'ar' ? "الحياة المحلية" : "Local Life",
+                    description: language === 'ar' ? "تجربة الثقافة التايلاندية الأصيلة" : "Experience authentic Thai culture"
+                },
+                {
+                    id: 7,
+                    category: 'food',
+                    src: "photos/585c1903-e8ad-4f4e-98bd-82d85baec79e.jpeg",
+                    title: language === 'ar' ? "طعام الشارع" : "Street Food",
+                    description: language === 'ar' ? "جرب ألذ المأكولات الشعبية" : "Try delicious street food delicacies"
+                },
+                {
+                    id: 8,
+                    category: 'adventure',
+                    src: "photos/e041e5d7-9d91-47ab-b783-01aebf236366.jpeg",
+                    title: language === 'ar' ? "المشي لمسافات طويلة" : "Hiking",
+                    description: language === 'ar' ? "رحلات في الغابات الخضراء" : "Trek through lush jungles"
+                }
+            ];
+
+            // Initialize lightbox when the component mounts
+            React.useEffect(() => {
+                if (typeof window !== 'undefined' && window.lightbox) {
+                    window.lightbox.option({
+                        'resizeDuration': 200,
+                        'wrapAround': true,
+                        'albumLabel': "Image %1 of %2"
+                    });
+                }
+            }, []);
+
+            const categories = [
+                { id: 'all', label: language === 'ar' ? 'الكل' : 'All' },
+                { id: 'nature', label: language === 'ar' ? 'الطبيعة' : 'Nature' },
+                { id: 'culture', label: language === 'ar' ? 'الثقافة' : 'Culture' },
+                { id: 'food', label: language === 'ar' ? 'الطعام' : 'Food' },
+                { id: 'adventure', label: language === 'ar' ? 'المغامرة' : 'Adventure' }
+            ];
+
+            return (
+                <div className="min-h-screen bg-gray-900">
+                    {/* Loading Overlay */}
+                    {loading && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                            <div className="loading-spinner"></div>
+                        </div>
+                    )}
+
+                    {/* Category Filters */}
+                    <div className="container mx-auto px-4 py-8">
+                        <div className="flex flex-wrap justify-center gap-4 mb-8">
+                            {categories.map(category => (
+                                <button
+                                    key={category.id}
+                                    onClick={() => setActiveFilter(category.id)}
+                                    className={`px-6 py-2 rounded-full transition-colors duration-200 ${
+                                        activeFilter === category.id
+                                            ? 'bg-blue-600 text-white'
+                                            : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                                    }`}
+                                >
+                                    {category.label}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Photo Grid */}
+                        <div className="masonry-grid">
+                            {galleryItems
+                                .filter(item => activeFilter === 'all' || item.category === activeFilter)
+                                .map((item, index) => (
+                                    <div key={item.id} className="gallery-item overflow-hidden rounded-lg">
+                                        <a 
+                                            href={item.src} 
+                                            data-lightbox="gallery" 
+                                            data-title={item.title}
+                                            className="block relative group"
+                                        >
+                                            <img
+                                                src={item.src}
+                                                alt={item.title}
+                                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                loading="lazy"
+                                                onLoad={() => {
+                                                    if (index === galleryItems.length - 1) {
+                                                        setLoading(false);
+                                                    }
+                                                }}
+                                            />
+                                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-opacity duration-300">
+                                                <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                                                    <h3 className="text-lg font-bold">{item.title}</h3>
+                                                    <p className="text-sm">{item.description}</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Complete the Navbar component with mobile menu
+        const MobileMenu = ({ isOpen, onClose, currentTranslations, handleNavClick }) => {
+            if (!isOpen) return null;
+
+            return (
+                <div className="fixed inset-0 bg-black bg-opacity-90 z-50 md:hidden">
+                    <div className="flex flex-col items-center pt-20 space-y-6">
+                        {['home', 'book', 'gallery', 'guide'].map((section) => (
+                            <a
+                                key={section}
+                                href={`#${section}`}
+                                onClick={(e) => {
+                                    handleNavClick(section, e);
+                                    onClose();
+                                }}
+                                className="text-white text-xl"
+                            >
+                                {currentTranslations[section]}
+                            </a>
+                        ))}
+                        
+                        <button 
+                            className="absolute top-4 right-4 text-white"
+                            onClick={onClose}
+                        >
+                            <i className="fas fa-times text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // Update the App component to include error boundary
+        class ErrorBoundary extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { hasError: false };
+            }
+
+            static getDerivedStateFromError(error) {
+                return { hasError: true };
+            }
+
+            componentDidCatch(error, errorInfo) {
+                console.error('Error:', error, errorInfo);
+            }
+
+            render() {
+                if (this.state.hasError) {
+                    return (
+                        <div className="flex items-center justify-center min-h-screen">
+                            <div className="text-center">
+                                <h1 className="text-2xl mb-4">Something went wrong</h1>
+                                <button 
+                                    onClick={() => window.location.reload()} 
+                                    className="bg-white text-black px-4 py-2 rounded"
+                                >
+                                    Reload Page
+                                </button>
+                            </div>
+                        </div>
+                    );
+                }
+
+                return this.props.children;
+            }
+        }
+
+        const App = () => {
+            // Initialize lightbox when the app mounts
+            React.useEffect(() => {
+                // Wait for the DOM to be ready
+                setTimeout(() => {
+                    if (typeof window !== 'undefined' && window.lightbox) {
+                        window.lightbox.option({
+                            'resizeDuration': 200,
+                            'wrapAround': true,
+                            'albumLabel': "Image %1 of %2"
+                        });
+                    }
+                }, 1000);
+            }, []);
+
+            return (
+                <ErrorBoundary>
+                    <LanguageProvider>
+                        <div className="min-h-screen bg-black text-white">
+                            <Navbar />
+                            <Gallery />
+                            <Footer />
+                        </div>
+                    </LanguageProvider>
+                </ErrorBoundary>
+            );
+        };
+
+        // Initialize lightbox globally
+        window.addEventListener('load', () => {
+            if (typeof window.lightbox === 'undefined') {
+                window.lightbox = {
+                    option: function(options) {
+                        this.options = { ...this.options, ...options };
+                    },
+                    options: {}
+                };
+            }
+        });
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html> 

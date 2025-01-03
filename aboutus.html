@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ABED Thailand</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-white">
+    <div id="root"></div>
+    
+    <!-- React and Babel -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        // Error Boundary Component
+        class ErrorBoundary extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { hasError: false, error: null };
+            }
+
+            static getDerivedStateFromError(error) {
+                return { hasError: true, error };
+            }
+
+            componentDidCatch(error, errorInfo) {
+                console.error('Error caught by boundary:', error, errorInfo);
+            }
+
+            render() {
+                if (this.state.hasError) {
+                    return (
+                        <div className="min-h-screen flex items-center justify-center bg-gray-900">
+                            <div className="text-center">
+                                <h1 className="text-3xl font-bold text-red-500 mb-4">Something went wrong</h1>
+                                <p className="text-gray-300 mb-4">We're sorry, but there was an error loading this page.</p>
+                                <button 
+                                    onClick={() => window.location.reload()} 
+                                    className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700"
+                                >
+                                    Reload Page
+                                </button>
+                            </div>
+                        </div>
+                    );
+                }
+                return this.props.children;
+            }
+        }
+
+        // Language Context and Provider
+        const translations = {
+            en: {
+                home: "Home",
+                book: "Book",
+                gallery: "Gallery",
+                guide: "Guide",
+                more: "More",
+                about: "About",
+                aboutUs: {
+                    title: "About ABED Thailand",
+                    subtitle: "Your Trusted Travel Partner Since 2018",
+                    description: "We are passionate about creating unforgettable experiences in Thailand. Our team of local experts ensures that every journey is authentic, safe, and memorable.",
+                    mission: "Our Mission",
+                    missionText: "To provide authentic Thai experiences while promoting sustainable tourism and supporting local communities.",
+                    vision: "Our Vision",
+                    visionText: "To become the most trusted name in Thai tourism, known for excellence, authenticity, and sustainability."
+                }
+            },
+            ar: {
+                home: "الرئيسية",
+                book: "احجز",
+                gallery: "معرض الصور",
+                guide: "دليل",
+                more: "المزيد",
+                about: "عن الشركة",
+                aboutUs: {
+                    title: "عن مصطفى تايلاند",
+                    subtitle: "شريكك الموثوق في السفر منذ 2018",
+                    description: "نحن شغوفون بخلق تجارب لا تُنسى في تايلاند. يضمن فريقنا من الخبراء المحليين أن تكون كل رحلة أصيلة وآمنة ومميزة.",
+                    mission: "مهمتنا",
+                    missionText: "تقديم تجارب تايلاندية أصيلة مع تعزيز السياحة المستدامة ودعم المجتمعات المحلية.",
+                    vision: "رؤيتنا",
+                    visionText: "أن نصبح الاسم الأكثر ثقة في السياحة التايلاندية، معروفين بالتميز والأصالة والاستدامة."
+                }
+            }
+        };
+
+        const LanguageContext = React.createContext({
+            language: 'en',
+            setLanguage: () => {},
+            translations: translations.en
+        });
+
+        const LanguageProvider = ({ children }) => {
+            const [language, setLanguage] = React.useState(() => {
+                return localStorage.getItem('preferredLanguage') || 'en'
+            });
+
+            React.useEffect(() => {
+                localStorage.setItem('preferredLanguage', language);
+            }, [language]);
+
+            const value = {
+                language,
+                setLanguage,
+                translations: translations[language]
+            };
+
+            return (
+                <LanguageContext.Provider value={value}>
+                    {children}
+                </LanguageContext.Provider>
+            );
+        };
+
+        // Navbar Component
+        const Navbar = () => {
+            const { language, setLanguage, translations } = React.useContext(LanguageContext);
+            const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+            const [showDropdown, setShowDropdown] = React.useState(false);
+
+            return (
+                <nav className="bg-black fixed w-full top-0 z-50">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex justify-between h-16">
+                            <div className="flex items-center">
+                                <a href="index.html" className="flex items-center space-x-2">
+                                    <img src="logo.jpeg" alt="Logo" className="h-8 w-8 md:h-12 md:w-12" />
+                                    <div className="text-white text-lg md:text-2xl font-bold">ABED</div>
+                                    <div className="text-white text-xs md:text-sm">Thailand</div>
+                                </a>
+                            </div>
+
+                            {/* Desktop Navigation */}
+                            <div className="hidden md:flex items-center space-x-8">
+                                <a href="index.html" className="text-gray-300 hover:text-white">{translations.home}</a>
+                                <a href="booking.html" className="text-gray-300 hover:text-white">{translations.book}</a>
+                                <a href="gallery.html" className="text-gray-300 hover:text-white">{translations.gallery}</a>
+                                <a href="aboutus.html" className="text-gray-300 hover:text-white">{translations.about}</a>
+                                
+                                {/* Language Selector */}
+                                <div className="relative">
+                                    <button 
+                                        onClick={() => setShowDropdown(!showDropdown)}
+                                        className="flex items-center bg-white rounded-full px-4 py-2 space-x-2"
+                                    >
+                                        <span>{language.toUpperCase()}</span>
+                                        <i className="fas fa-chevron-down"></i>
+                                    </button>
+                                    
+                                    {showDropdown && (
+                                        <div className="absolute top-12 right-0 w-32 bg-white rounded-lg shadow-lg">
+                                            <button 
+                                                onClick={() => {
+                                                    setLanguage('en');
+                                                    setShowDropdown(false);
+                                                }}
+                                                className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                            >
+                                                English
+                                            </button>
+                                            <button 
+                                                onClick={() => {
+                                                    setLanguage('ar');
+                                                    setShowDropdown(false);
+                                                }}
+                                                className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                            >
+                                                العربية
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Mobile Menu Button */}
+                            <div className="md:hidden flex items-center">
+                                <button 
+                                    onClick={() => setShowMobileMenu(!showMobileMenu)}
+                                    className="text-gray-300 hover:text-white"
+                                >
+                                    <i className="fas fa-bars text-2xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Mobile Menu */}
+                    {showMobileMenu && (
+                        <div className="md:hidden">
+                            <div className="fixed inset-0 bg-black bg-opacity-90 z-50">
+                                <div className="flex flex-col items-center justify-center h-full space-y-8">
+                                    <a href="index.html" className="text-white text-xl">{translations.home}</a>
+                                    <a href="booking.html" className="text-white text-xl">{translations.book}</a>
+                                    <a href="gallery.html" className="text-white text-xl">{translations.gallery}</a>
+                                    <a href="aboutus.html" className="text-white text-xl">{translations.about}</a>
+                                    
+                                    <div className="flex flex-col items-center space-y-4">
+                                        <button 
+                                            onClick={() => setLanguage('en')}
+                                            className="text-white text-xl"
+                                        >
+                                            English
+                                        </button>
+                                        <button 
+                                            onClick={() => setLanguage('ar')}
+                                            className="text-white text-xl"
+                                        >
+                                            العربية
+                                        </button>
+                                    </div>
+
+                                    {/* Close Button */}
+                                    <button 
+                                        className="absolute top-4 right-4 text-white"
+                                        onClick={() => setShowMobileMenu(false)}
+                                    >
+                                        <i className="fas fa-times text-2xl"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </nav>
+            );
+        };
+
+        // About Us Component
+        const AboutUs = () => {
+            const { language, translations } = React.useContext(LanguageContext);
+            const { aboutUs } = translations;
+
+            return (
+                <div className="pt-20 min-h-screen">
+                    {/* Hero Section */}
+                    <div className="relative h-96 bg-cover bg-center" style={{ backgroundImage: "url('photos/27178687-478e-456d-aa0a-18c8e749c6db.jpeg')" }}>
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                            <div className="text-center">
+                                <h1 className="text-4xl md:text-6xl font-bold mb-4">{aboutUs.title}</h1>
+                                <p className="text-xl md:text-2xl">{aboutUs.subtitle}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="max-w-7xl mx-auto px-4 py-16">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                            {/* Description */}
+                            <div className="space-y-8">
+                                <p className="text-lg leading-relaxed">
+                                    {aboutUs.description}
+                                </p>
+                                
+                                {/* Mission */}
+                                <div>
+                                    <h2 className="text-2xl font-bold mb-4">{aboutUs.mission}</h2>
+                                    <p className="text-gray-300">{aboutUs.missionText}</p>
+                                </div>
+                                
+                                {/* Vision */}
+                                <div>
+                                    <h2 className="text-2xl font-bold mb-4">{aboutUs.vision}</h2>
+                                    <p className="text-gray-300">{aboutUs.visionText}</p>
+                                </div>
+                            </div>
+
+                            {/* Images */}
+                            <div className="grid grid-cols-2 gap-4">
+                                <img src="photos/89c21592-ee2d-4518-a400-5ce6e1258910.jpeg" alt="Thai Experience" className="rounded-lg" />
+                                <img src="photos/bea17abf-8c2e-4d2b-b342-18089b0b4db2.jpeg" alt="Local Culture" className="rounded-lg" />
+                                <img src="photos/0f05103e-1b82-4ec0-806c-9e1131eee05e.jpeg" alt="Adventure" className="rounded-lg" />
+                                <img src="photos/d64e328a-f106-4e91-8e78-e84f4a03ed94.jpeg" alt="Nature" className="rounded-lg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Footer Component (reuse from other pages)
+        const Footer = () => {
+            const { language, translations } = React.useContext(LanguageContext);
+            const defaultTranslations = {
+                footer: {
+                    followMe: "Follow Me",
+                    contactUs: "Contact Us",
+                    sendUs: "Send Message",
+                    importantLinks: "Important Links",
+                    cookies: "Cookie Policy",
+                    consumer: "Consumer Protection",
+                    terms: "Terms & Conditions",
+                    company: "Company Profile",
+                    planTrip: "Plan Your Trip",
+                    visa: "Thailand Visa",
+                    flight: "Book Flights",
+                    transport: "Local Transport",
+                    accommodation: "Book Hotels",
+                    adventures: "Book Adventures",
+                    gear: "Travel Essentials",
+                    pages: "Quick Links",
+                    book: "Book Now",
+                    plan: "Trip Planning",
+                    faq: "FAQ",
+                    contact: "Contact",
+                    about: "About Us",
+                    costs: "Trip Costs",
+                    copyright: "© 2024 All rights reserved",
+                    photoCredit: "Photos by Thailand Tourism Board",
+                    newsletter: {
+                        title: "Special Offers",
+                        description: "Subscribe for exclusive Thailand travel deals"
+                    }
+                }
+            };
+
+            const currentTranslations = translations || defaultTranslations;
+            const footer = currentTranslations.footer || defaultTranslations.footer;
+
+            return (
+                <footer className="bg-black py-12 px-4">
+                    <div className="max-w-7xl mx-auto">
+                        {/* Footer content */}
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                            <div>
+                                <h3 className="text-lg font-bold mb-4">{footer.pages}</h3>
+                                <div className="space-y-2">
+                                    <a href="index.html" className="block text-gray-300 hover:text-white">Home</a>
+                                    <a href="booking.html" className="block text-gray-300 hover:text-white">Book</a>
+                                    <a href="gallery.html" className="block text-gray-300 hover:text-white">Gallery</a>
+                                    <a href="aboutus.html" className="block text-gray-300 hover:text-white">About</a>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 className="text-lg font-bold mb-4">{footer.followMe}</h3>
+                                <div className="flex space-x-4">
+                                    <a href="#" className="text-gray-300 hover:text-white"><i className="fab fa-facebook"></i></a>
+                                    <a href="#" className="text-gray-300 hover:text-white"><i className="fab fa-instagram"></i></a>
+                                    <a href="#" className="text-gray-300 hover:text-white"><i className="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 className="text-lg font-bold mb-4">{footer.contactUs}</h3>
+                                <p className="text-gray-300">{footer.sendUs}</p>
+                            </div>
+                            
+                            <div>
+                                <h3 className="text-lg font-bold mb-4">{footer.importantLinks}</h3>
+                                <div className="space-y-2">
+                                    <a href="#" className="block text-gray-300 hover:text-white">{footer.terms}</a>
+                                    <a href="#" className="block text-gray-300 hover:text-white">{footer.privacy}</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="mt-8 pt-8 border-t border-gray-800 text-center">
+                            <p className="text-gray-400">{footer.copyright}</p>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            return (
+                <ErrorBoundary>
+                    <LanguageProvider>
+                        <div className="min-h-screen bg-gray-900 text-white">
+                            <Navbar />
+                            <AboutUs />
+                            <Footer />
+                        </div>
+                    </LanguageProvider>
+                </ErrorBoundary>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

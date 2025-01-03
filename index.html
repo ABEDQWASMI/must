@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore the beauty of Thailand with exclusive adventure packages at ABED Thailand Adventure.">
+    <title>ABED Thailand Adventure</title>
+
+    <!-- External Libraries -->
+    <script defer src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script defer src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script defer src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-image: url('https://placehold.co/1920x1080');
+            background-size: cover;
+            background-position: center;
+            background: linear-gradient(to bottom, #000000, #1a1a1a);
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+        .mountain-bg {
+            background: url('https://placehold.co/1920x200') no-repeat top center;
+            background-size: cover;
+        }
+        /* Hide scrollbar but keep functionality */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Responsive text sizes */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem !important;
+            }
+            h2 {
+                font-size: 1.5rem !important;
+            }
+            p {
+                font-size: 1rem !important;
+            }
+        }
+
+        /* Responsive spacing */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .py-20 {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+        }
+
+        /* Swiper styles */
+        .swiper-container {
+            padding: 20px 0;
+        }
+        
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: white;
+        }
+        
+        .swiper-pagination-bullet {
+            background: white;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: #3B82F6;
+        }
+    </style>
+
+    <!-- Add these to your existing head section -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for React and ReactDOM to be loaded
+            if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
+                const loadScript = (src) => {
+                    return new Promise((resolve, reject) => {
+                        const script = document.createElement('script');
+                        script.src = src;
+                        script.onload = resolve;
+                        script.onerror = reject;
+                        document.head.appendChild(script);
+                    });
+                };
+
+                Promise.all([
+                    loadScript('https://unpkg.com/react@17/umd/react.development.js'),
+                    loadScript('https://unpkg.com/react-dom@17/umd/react-dom.development.js'),
+                    loadScript('https://unpkg.com/@babel/standalone/babel.js')
+                ]).then(() => {
+                    // Now we can safely run our React code
+                    const babelScript = document.createElement('script');
+                    babelScript.type = 'text/babel';
+                    babelScript.textContent = `
+                        // Your existing React code here
+                        const translations = {
+                            // ... rest of your React code ...
+                        };
+                        
+                        ReactDOM.render(<App />, document.getElementById('root'));
+                    `;
+                    document.body.appendChild(babelScript);
+                });
+            }
+        });
+    </script>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen">
+    <div id="root"></div>
+    
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    
+    <script type="text/babel">
+        // Define translations
+        const translations = {
+            en: {
+                home: "Home",
+                book: "Book",
+                gallery: "Gallery",
+                guide: "Guide",
+                more: "More",
+                planTrip: "Plan your trip",
+                welcome: "Welcome to ABED Thailand Adventure",
+                welcomeDesc: "Explore the beauty of Thailand with our exclusive adventure packages.",
+                about: "About Us",
+                contact: "Contact",
+                faq: "FAQ",
+                newsletter: {
+                    title: "Special Offers",
+                    description: "Subscribe for exclusive Thailand travel deals and job opportunities in Southeast Asia"
+                },
+                form: {
+                    phone: "Phone",
+                    dob: "Date of Birth",
+                    familyName: "Family Name",
+                    firstName: "First Name",
+                    city: "City",
+                    email: "Email",
+                    send: "Send",
+                    terms: "I agree to the Terms & Conditions and Privacy Policy",
+                    offers: "I would like to receive offers from ABED Thailand via email"
+                },
+                footer: {
+                    newsletter: {
+                        title: "Special Offers",
+                        description: "Subscribe for exclusive Thailand travel deals and job opportunities in Southeast Asia"
+                    },
+                    followMe: "Follow Me",
+                    contactUs: "Contact Us",
+                    sendUs: "Send Message",
+                    importantLinks: "Important Links",
+                    cookies: "Cookie Policy",
+                    consumer: "Consumer Protection",
+                    terms: "Terms & Conditions",
+                    company: "Company Profile",
+                    planTrip: "Plan Your Trip",
+                    visa: "Thailand Visa",
+                    flight: "Book Flights",
+                    transport: "Local Transport",
+                    accommodation: "Book Hotels",
+                    adventures: "Book Adventures",
+                    gear: "Travel Essentials",
+                    pages: "Quick Links",
+                    book: "Book Now",
+                    plan: "Trip Planning",
+                    faq: "FAQ",
+                    contact: "Contact",
+                    about: "About Us",
+                    costs: "Trip Costs",
+                    copyright: "ABED Thailand © All rights reserved",
+                    photoCredit: "Photos by Thailand Tourism Board"
+                },
+                welcome: {
+                    title: "ABED Thailand",
+                    subtitle: "Your guide to authentic Thai experiences",
+                    since: "since 2018",
+                    motto: "...we travel to gather experiences, not objects.",
+                    book: "Book Now"
+                },
+                travelOptions: {
+                    bookResort: "Luxury Thai Resorts",
+                    bookHotel: "Bangkok Hotels",
+                    bookVilla: "Beach Villas",
+                    bookFlight: "Book Flight",
+                    travelInsurance: "Travel Insurance",
+                    thaiVisa: "Thai Visa",
+                    bookCar: "Rent a Car"
+                },
+                destinations: "Destinations"
+            },
+            ar: {
+                home: "الرئيسية",
+                book: "حجز",
+                gallery: "معرض الصور",
+                guide: "دليل",
+                more: "المزيد",
+                planTrip: "خط ط رحلتك",
+                welcome: "مرحباً بكم في مصطفى تايلاند للمغامرات",
+                welcomeDesc: "اكتشف جمال تايلاند معنا",
+                about: "من نحن",
+                contact: "اتصل بنا",
+                faq: "الأسئلة الشائعة",
+                newsletter: {
+                    title: "عروض خاصة",
+                    description: "اشترك للحصول على عروض سفر حصرية إلى تايلاند وفرص عمل في جنوب شرق آسيا"
+                },
+                form: {
+                    phone: "رقم الهاتف",
+                    dob: "تاريخ الميلاد",
+                    familyName: "اسم العائلة",
+                    firstName: "الاسم الأول",
+                    city: "المدينة",
+                    email: "البريد الإلكتروني",
+                    send: "إرسال",
+                    terms: "أوافق على الشروط والأحكام وسياسة الخصوصية للتسجيل",
+                    offers: "أرغب في الحصول على عروض من شركة ABED Thailand عبر البريد الإلكتروني"
+                },
+                footer: {
+                    newsletter: {
+                        title: "عروض خاصة",
+                        description: "اشترك للحصول على عروض سفر حصرية إلى تايلاند وفرص عمل في جنوب شرق آسيا"
+                    },
+                    followMe: "تابعني",
+                    contactUs: "اتصل بنا",
+                    sendUs: "أرسل رسالة",
+                    importantLinks: "روابط مهمة",
+                    cookies: "سياسة ملفات الكوكيز",
+                    consumer: "حماية المستهلك",
+                    terms: "الشروط والأحكام",
+                    company: "نبذة عن الشركة",
+                    planTrip: "خطط رحلتك",
+                    visa: "تأشيرة تايلاند",
+                    flight: "حجز الطيران",
+                    transport: "النقل المحلي",
+                    accommodation: "حجز الفنادق",
+                    adventures: "حجز المغامرات",
+                    gear: "مستلزمات السفر",
+                    pages: "روابط سريعة",
+                    book: "احجز الآن",
+                    plan: "تخطيط الرحلة",
+                    faq: "الأسئلة الشائعة",
+                    contact: "اتصل بنا",
+                    about: "من نحن",
+                    costs: "تكاليف الرحلة",
+                    copyright: "مصطفى تايلاند © جميع الحقوق محفوظة",
+                    photoCredit: "الصور بواسطة هيئة السياحة التايلاندية"
+                },
+                welcome: {
+                    title: "مصطفى تايلاند",
+                    subtitle: "دليلك للتجارب التايلاندية الأصيلة",
+                    since: "منذ 2018",
+                    motto: "...نسافر لجمع التجارب، وليس الأشياء",
+                    book: "احجز الآن"
+                },
+                travelOptions: {
+                    bookResort: "منتجعات تايلاند الفاخرة",
+                    bookHotel: "فنادق بانكوك",
+                    bookVilla: "فلل الشاطئ",
+                    bookFlight: "حجز الطيران",
+                    travelInsurance: "تأمين السفر",
+                    thaiVisa: "تأشيرة تايلند",
+                    bookCar: "استئجار سيارة"
+                },
+                destinations: "الوجهات"
+            }
+        };
+
+        // Create Language Context
+        const LanguageContext = React.createContext({
+            language: 'en',
+            setLanguage: () => {},
+            translations: translations.en
+        });
+
+        // Navbar Component
+        const Navbar = () => {
+            const { language, setLanguage } = React.useContext(LanguageContext);
+            const [showMobileMenu, setShowMobileMenu] = React.useState(false);
+            const [showDropdown, setShowDropdown] = React.useState(false);
+            const [showMoreMenu, setShowMoreMenu] = React.useState(false);
+            const [activeSection, setActiveSection] = React.useState('home');
+
+            const currentTranslations = translations[language];
+
+            const handleNavClick = (section, event) => {
+                event.preventDefault();
+                
+                // Handle navigation to different pages
+                switch(section) {
+                    case 'home':
+                        window.location.href = 'index.html';
+                        break;
+                    case 'book':
+                        window.location.href = 'booking.html';
+                        break;
+                    case 'gallery':
+                        window.location.href = 'gallery.html';
+                        break;
+                    case 'about':
+                        window.location.href = 'aboutus.html';
+                        break;
+                    case 'guide':
+                        window.location.href = 'guide.html';
+                        break;
+                    default:
+                        setActiveSection(section);
+                        const element = document.getElementById(section);
+                        if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                }
+                
+                setShowMobileMenu(false);
+            };
+
+            return (
+                <nav className="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+                    <div className="flex items-center justify-between w-full p-4 mx-auto">
+                        {/* Logo Section */}
+                        <div className="flex items-center space-x-2">
+                            <img src="logo.jpeg" alt="Logo" className="h-8 w-8 md:h-12 md:w-12" />
+                            <div className="text-white text-lg md:text-2xl font-bold">ABED</div>
+                            <div className="text-white text-xs md:text-sm">Thailand</div>
+                        </div>
+
+                        {/* Mobile Menu Button */}
+                        <button 
+                            className="md:hidden text-white"
+                            onClick={() => setShowMobileMenu(!showMobileMenu)}
+                        >
+                            <i className={`fas fa-${showMobileMenu ? 'times' : 'bars'}`}></i>
+                        </button>
+
+                        {/* Desktop Menu */}
+                        <div className="hidden md:flex items-center space-x-4">
+                            <div className="flex items-center bg-white rounded-full px-4 py-2 space-x-4">
+                                {['home', 'book', 'gallery', 'guide'].map(( section) => (
+                                    <a
+                                        key={section}
+                                        href={`#${section}`}
+                                        onClick={(e) => handleNavClick(section, e)}
+                                        className={`text-gray-700 hover:text-black transition-colors ${
+                                            activeSection === section ? 'font-bold' : ''
+                                        }`}
+                                    >
+                                        {currentTranslations[section]}
+                                    </a>
+                                ))}
+                                
+                                <div className="relative">
+                                    <button 
+                                        onClick={() => setShowMoreMenu(!showMoreMenu)}
+                                        className="text-gray-700 hover:text-black transition-colors"
+                                    >
+                                        {currentTranslations.more}
+                                    </button>
+                                    
+                                    {showMoreMenu && (
+                                        <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2">
+                                            {['about', 'contact', 'faq'].map((item) => (
+                                                <a
+                                                    key={item}
+                                                    href={`#${item}`}
+                                                    onClick={(e) => {
+                                                        handleNavClick(item, e);
+                                                        setShowMoreMenu(false);
+                                                    }}
+                                                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                                >
+                                                    {currentTranslations[item]}
+                                                </a>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            <button 
+                                onClick={() => setShowDropdown(!showDropdown)}
+                                className="flex items-center bg-white rounded-full px-4 py-2 space-x-2"
+                            >
+                                <span>{language.toUpperCase()}</span>
+                                <i className="fas fa-chevron-down"></i>
+                            </button>
+                            
+                            {showDropdown && (
+                                <div className="absolute top-16 right-4 w-32 bg-white rounded-lg shadow-lg">
+                                    <button 
+                                        onClick={() => {
+                                            setLanguage('en');
+                                            setShowDropdown(false);
+                                        }}
+                                        className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    >
+                                        English
+                                    </button>
+                                    <button 
+                                        onClick={() => {
+                                            setLanguage('ar');
+                                            setShowDropdown(false);
+                                        }}
+                                        className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                    >
+                                        العربية
+                                    </button>
+                                </div>
+                            )}
+
+                            <button className="flex items-center bg-black text-white rounded-full px-4 py-2 space-x-2">
+                                <span>{currentTranslations.planTrip}</span>
+                                <i className="fas fa-plane"></i>
+                            </button>
+                        </div>
+
+                        {/* Mobile Menu Overlay */}
+                        {showMobileMenu && (
+                            <div className="fixed inset-0 bg-black bg-opacity-90 z-50 md:hidden">
+                                <div className="flex flex-col items-center pt-20 space-y-6">
+                                    {['home', 'book', 'gallery', 'guide'].map((section) => (
+                                        <a
+                                            key={section}
+                                            href={`#${section}`}
+                                            onClick={(e) => {
+                                                handleNavClick(section, e);
+                                                setShowMobileMenu(false);
+                                            }}
+                                            className="text-white text-xl"
+                                        >
+                                            {currentTranslations[section]}
+                                        </a>
+                                    ))}
+                                    
+                                    {/* Language Selector */}
+                                    <div className="flex flex-col items-center space-y-4">
+                                        <button 
+                                            onClick={() => setLanguage('en')}
+                                            className="text-white text-xl"
+                                        >
+                                            English
+                                        </button>
+                                        <button 
+                                            onClick={() => setLanguage('ar')}
+                                            className="text-white text-xl"
+                                        >
+                                            العربية
+                                        </button>
+                                    </div>
+
+                                    {/* Close Button */}
+                                    <button 
+                                        className="absolute top-4 right-4 text-white"
+                                        onClick={() => setShowMobileMenu(false)}
+                                    >
+                                        <i className="fas fa-times text-2xl"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </nav>
+            );
+        };
+
+        // Language Provider Component
+        const LanguageProvider = ({ children }) => {
+            const [language, setLanguage] = React.useState('en');
+
+            const value = {
+                language,
+                setLanguage,
+                translations: translations[language]
+            };
+
+            return (
+                <LanguageContext.Provider value={value}>
+                    {children}
+                </LanguageContext.Provider>
+            );
+        };
+
+        const Footer = () => {
+            const { language, translations } = React.useContext(LanguageContext);
+            const { footer } = translations;
+
+            return (
+                <footer className="w-full bg-black py-12 px-4">
+                    <div className="max-w-7xl mx-auto">
+                        {/* Newsletter Form Section */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                            <div className="flex flex-col items-center space-y-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                                    <input type="text" placeholder={translations.form.phone} className="bg-gray-800/50 text-white p-2 rounded-full" />
+                                    <input type="text" placeholder={translations.form.dob} className="bg-gray-800/50 text-white p-2 rounded-full" />
+                                    <input type="text" placeholder={translations.form.familyName} className="bg-gray-800/50 text-white p-2 rounded-full" />
+                                    <input type="text" placeholder={translations.form.firstName} className="bg-gray-800/50 text-white p-2 rounded-full" />
+                                </div>
+                                <div className="flex flex-wrap gap-4 w-full">
+                                    <button className="bg-white text-black px-8 py-2 rounded-full hover:bg-gray-100">{translations.form.send}</button>
+                                    <input type="text" placeholder={translations.form.city} className="bg-gray-800/50 text-white p-2 rounded-full flex-grow" />
+                                    <input type="text" placeholder={translations.form.email} className="bg-gray-800 /50 text-white p-2 rounded-full flex-grow" />
+                                </div>
+                                <div className="flex flex-col items-start space-y-2 w-full">
+                                    <label className="flex items-center space-x-2 text-sm">
+                                        <input type="radio" name="option" className="form-radio" />
+                                        <span>{translations.form.terms}</span>
+                                    </label>
+                                    <label className="flex items-center space-x-2 text-sm">
+                                        <input type="radio" name="option" className="form-radio" />
+                                        <span>{translations.form.offers}</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col items-center md:items-end justify-center text-right">
+                                <h2 className="text-xl font-bold mb-4">{footer.newsletter.title}</h2>
+                                <p className="text-gray-300">{footer.newsletter.description}</p>
+                            </div>
+                        </div>
+
+                        {/* Main Footer Links */}
+                        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
+                            {/* Follow me */}
+                            <div className="flex flex-col items-center md:items-start space-y-4">
+                                <h3 className="text-lg font-bold">{footer.followMe}</h3>
+                                <div className="flex space-x-4">
+                                    <a href="#" className="text-white hover:text-gray-300">
+                                        <i className="fab fa-instagram text-xl"></i>
+                                    </a>
+                                    <a href="#" className="text-white hover:text-gray-300">
+                                        <i className="fab fa-facebook text-xl"></i>
+                                    </a>
+                                    <a href="#" className="text-white hover:text-gray-300">
+                                        <i className="fab fa-youtube text-xl"></i>
+                                    </a>
+                                    <a href="#" className="text-white hover:text-gray-300">
+                                        <i className="fab fa-tiktok text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Contact us */}
+                            <div className="flex flex-col items-center md:items-start space-y-4">
+                                <h3 className="text-lg font-bold">{footer.contactUs}</h3>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.sendUs}</a>
+                            </div>
+
+                            {/* Important Links */}
+                            <div className="flex flex-col items-center md:items-start space-y-2">
+                                <h3 className="text-lg font-bold">{footer.importantLinks}</h3>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.cookies}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.consumer}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.terms}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.company}</a>
+                            </div>
+
+                            {/* Plan your trip */}
+                            <div className="flex flex-col items-center md:items-start space-y-2">
+                                <h3 className="text-lg font-bold">{footer.planTrip}</h3>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.visa}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.flight}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.transport}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.accommodation}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.adventures}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.gear}</a>
+                            </div>
+
+                            {/* Home Pages */}
+                            <div className="flex flex-col items-center md:items-start space-y-2">
+                                <h3 className="text-lg font-bold">{footer.pages}</h3>
+                                <a href="booking.html" className="text-gray-300 hover:text-white">{footer.book}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.planTrip}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.faq}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.contact}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.about}</a>
+                                <a href="#" className="text-gray-300 hover:text-white">{footer.costs}</a>
+                            </div> 
+                        </div>
+
+                        {/* Logo and Copyright */}
+                        <div className="border-t border-gray-800 pt-8 mt-8">
+                            <div className="flex flex-col items-center space-y-4">
+                                <img src="logo.jpeg" alt="ABED Thailand" className="h-16" />
+                                <p className="text-gray-400">{footer.copyright}</p>
+                                <p className="text-gray-400">{footer.photoCredit}</p>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        const WelcomePanel = () => {
+            const { language, translations } = React.useContext(LanguageContext);
+            const { welcome } = translations;
+
+            return (
+                <div className="relative h-screen w-full">
+                    {/* Background Image */}
+                    <div 
+                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                        style={{
+                            backgroundImage: "url('https://images.unsplash.com/photo-1528181304800-259b08848526?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80')"
+                        }}
+                    />
+                    
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-black/40" />
+
+                    {/* Content */}
+                    <div className="relative h-full flex flex-col items-center justify-center text-white text-center px-4">
+                        {/* Logo */}
+                        <div className="mb-6">
+                            <svg className="w-16 h-16 mx-auto" viewBox="0 0 24 24">
+                                <path 
+                                    fill="currentColor" 
+                                    d="M14,20H10V15H14M10,9V4H14V9H10Z"
+                                />
+                            </svg>
+                        </div>
+
+                        {/* Text Content */}
+                        <div className="space-y-4 max-w-2xl">
+                            <h1 className="text-5xl font-bold tracking-wide">
+                                {welcome.title}
+                            </h1>
+                            <p className="text-xl font-light">
+                                {welcome.subtitle}
+                            </p>
+                            <p className="text-lg opacity-80">
+                                {welcome.since}
+                            </p>
+                            <p className="text-xl italic mt-8">
+                                {welcome.motto}
+                            </p>
+                        </div>
+
+                        {/* Book Button */}
+                        <button 
+                            onClick={() => window.location.href = 'booking.html'} 
+                            className="bg-white text-black px-8 py-3 rounded-full hover:bg-gray-100"
+                        >
+                            {translations.welcome.book}
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        const TravelOptions = () => {
+            const { language, translations } = React.useContext(LanguageContext);
+            const [activeIndex, setActiveIndex] = React.useState(0);
+            const carouselRef = React.useRef(null);
+
+            const options = [
+                {
+                    img: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4",  // Luxury Thai resort image
+                    text: translations.travelOptions.bookResort,
+                    icon: "hotel",
+                    description: "Luxury beachfront resorts in Phuket and Koh Samui"
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1589923158776-cb4485d99fd6",  // Bangkok cityscape with hotels
+                    text: translations.travelOptions.bookHotel,
+                    icon: "building",
+                    description: "Premium hotels in Bangkok's best locations"
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1505881402582-c5bc11054f91", // Beach villa image
+                    text: translations.travelOptions.bookVilla,
+                    icon: "home",
+                    description: "Private villas with infinity pools"
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05", // Airplane image
+                    text: translations.travelOptions.bookFlight,
+                    icon: "plane",
+                    description: "International flights to Thailand"
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800", // Travel insurance concept
+                    text : translations.travelOptions.travelInsurance,
+                    icon: "shield-alt",
+                    description: "Comprehensive travel protection"
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c", // Thai visa image
+                    text: translations.travelOptions.thaiVisa,
+                    icon: "passport",
+                    description: "Thai visa application assistance"
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d", // Car rental image
+                    text: translations.travelOptions.bookCar,
+                    icon: "car",
+                    description: "Reliable transportation in Thailand"
+                }
+            ];
+
+            const nextSlide = () => {
+                if (activeIndex < options.length - 3) {
+                    setActiveIndex(activeIndex + 1);
+                    carouselRef.current.scrollBy({ left: 424, behavior: 'smooth' });
+                }
+            };
+
+            const prevSlide = () => {
+                if (activeIndex > 0) {
+                    setActiveIndex(activeIndex - 1);
+                    carouselRef.current.scrollBy({ left: -424, behavior: 'smooth' });
+                }
+            };
+
+            return (
+                <div className="relative w-full bg-black py-8 md:py-16">
+                    <div className="max-w-7xl mx-auto px-4">
+                        <div className="relative">
+                            {/* Navigation Arrows - Hide on mobile */}
+                            <button 
+                                onClick={prevSlide}
+                                className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 text-white p-4 rounded-full backdrop-blur-sm transition-all"
+                            >
+                                <i className="fas fa-chevron-left"></i>
+                            </button>
+
+                            {/* Cards Container */}
+                            <div 
+                                ref={carouselRef}
+                                className="flex overflow-x-auto md:overflow-x-hidden gap-4 md:gap-8 scroll-smooth no-scrollbar"
+                            >
+                                {options.map((option, index) => (
+                                    <div
+                                        key={index}
+                                        className="flex-none w-[280px] md:w-[400px]"
+                                    >
+                                        {/* Card */}
+                                        <div className="relative h-[500px] rounded-2xl overflow-hidden">
+                                            {/* Background Image */}
+                                            <img 
+                                                src={option.img} 
+                                                alt={option.text}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            />
+                                            
+                                            {/* Dark Gradient Overlay */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-70" />
+
+                                            {/* Book Now Button */}
+                                            <div className="absolute top-6 right-6">
+                                                <button className="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-full transition-all duration-300">
+                                                    {language === 'ar' ? 'احجز الآن' : 'Book Now'}
+                                                </button>
+                                            </div>
+
+                                            {/* Content */}
+                                            <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                                                <div className="mb-4">
+                                                    <i className={`fas fa-${option.icon} text-3xl`}></i>
+                                                </div>
+                                                <h3 className="text-2xl font-bold mb-2">{option.text}</h3>
+                                                <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                                    {option.description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const AboutSection = () => {
+            const { language, translations } = React.useContext(LanguageContext);
+            
+            return (
+                <div className="relative bg-black py-20">
+                    <div className="max-w-7xl mx-auto px-4">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+                            {/* Left Content */}
+                            <div className="md:w-1/2 space-y-6">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <img 
+                                        src="logo.jpeg"
+                                        alt="Mustafa Thailand Logo" 
+                                        className="w-16 h-16 object-contain"
+                                    />
+                                    <h1 className="text-4xl font-bold text-white">
+                                        {language === 'ar' ? 'من نحن؟' : 'About Us'}
+                                    </h1>
+                                </div>
+
+                                <div className="space-y-4 text-gray-300">
+                                    <p>
+                                        {language === 'ar' 
+                                            ? 'نحن شركة سياحية متخصصة في تقديم تجارب سفر استثنائية في تايلاند. منذ عام 2018، نقدم خدمات سياحية متكاملة تجمع بين الراحة والمغامرة.'
+                                            : 'We are a specialized travel company offering exceptional experiences in Thailand. Since 2018, we have been providing comprehensive tourism services that combine comfort and adventure.'
+                                        }
+                                    </p>
+                                    <p>
+                                        {language === 'ar'
+                                            ? 'نسعى لتقديم تجارب فريدة تتجاوز السياحة التقليدية، حيث نجمع بين الثقافة التايلندية الأصيلة والراحة العصرية. هدفنا هو جعل رحلتك لا تُنسى.'
+                                            : 'We strive to provide unique experiences beyond traditional tourism, combining authentic Thai culture with modern comfort. Our goal is to make your journey unforgettable.'
+                                        }
+                                    </p>
+                                    <p>
+                                        {language === 'ar'
+                                            ? 'نفتخر بفريقنا المحترف وشراكاتنا المحلية التي تضمن لك تجربة سفر سلسة وممتعة في جميع أنحاء تايلاند.'
+                                            : 'We take pride in our professional team and local partnerships that ensure you have a smooth and enjoyable travel experience throughout Thailand.'
+                                        }
+                                    </p>
+                                </div>
+
+                                <div className="flex flex-col sm:flex-row gap-4 pt-6">
+                                    <button className="bg-white text-black rounded-full px-8 py-3 flex items-center justify-center group hover:bg-gray-100 transition-colors">
+                                        <i className={`fas fa-arrow-${language === 'ar' ? 'right' : 'left'} 'mr-2 group-hover:transform group-hover:translate-x-1 transition-transform`}></i>
+                                        {language === 'ar' ? 'المزيد' : 'More'}
+                                    </button>
+                                    <button className="border border-white text-white rounded-full px-8 py-3 flex items-center justify-center hover:bg-white/10 transition-colors">
+                                        {language === 'ar' ? 'جوائزنا الدولية' : 'International Awards'}
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Right Image */}
+                            <div className="md:w-1/2">
+                                <div className="relative aspect-square rounded-2xl overflow-hidden">
+                                    <img 
+                                        src="https://images.unsplash.com/photo-1528181304800-259b08848526"
+                                        alt="Thailand Tourism"
+                                        className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const DestinationsSection = () => {
+            const { language, translations } = React.useContext(LanguageContext);
+            
+            const destinations = [
+                {
+                    id: 'jet-ski',
+                    img: "photos/bea17abf-8c2e-4d2b-b342-18089b0b4db2.jpeg",
+                    title: language === 'ar' ? 'جولة الجت سكي في بوكيت' : 'Phuket Jet Ski Island Tour',
+                    description: language === 'ar' ? 'استكشاف 6 جزر مذهلة مع الجت سكي' : 'Explore 6 amazing islands by jet ski',
+                    trip: {
+                        category: 'adventure',
+                        image: "photos/bea17abf-8c2e-4d2b-b342-18089b0b4db2.jpeg",
+                        title: language === 'ar' ? 'جولة الجت سكي في بوكيت' : 'Phuket Jet Ski Island Tour',
+                        description: language === 'ar' 
+                            ? 'اجعل يومك مليئًا بالمغامرة والمتعة مع جولة الجت سكي التي تأخذك إلى أجمل جزر بوكيت!' 
+                            : 'Make your day full of adventure with a jet ski tour to Phuket\'s most beautiful islands!',
+                        duration: "6.5 hours",
+                        startTime: "09:00",
+                        endTime: "15:30",
+                        groupType: language === 'ar' ? "مجموعة صغيرة" : "Small Group",
+                        location: language === 'ar' ? "بوكيت" : "Phuket",
+                        destinations: language === 'ar' ? [
+                            "جزيرة كوه خونغ - البحيرة الخفية",
+                            "جزيرة بانانا بيتش - شاطئ رملي أبيض",
+                            "جزيرة كوه راشا - غطس وشعاب مرجانية",
+                            "جزيرة كورال - أنشطة بحرية",
+                            "جزيرة كوه ماي تون - مشاهدة الدلافين",
+                            "جزيرة جيمس بوند - الصخور الكارستية"
+                        ] : [
+                            "Koh Hong - Hidden Lagoon",
+                            "Banana Beach - White Sand Beach",
+                            "Koh Racha - Snorkeling & Coral Reefs",
+                            "Coral Island - Water Activities",
+                            "Koh Maiton - Dolphin Watching",
+                            "James Bond Island - Karst Rocks"
+                        ],
+                        priceIncludes: language === 'ar'
+                            ? "جت سكي حديث، دليل محترف، سترات نجاة، وجبة غداء، مشروبات، معدات غطس، نقل من وإلى الفندق"
+                            : "Modern jet ski, Professional guide, Life jackets, Lunch, Drinks, Snorkeling gear, Hotel transfers"
+                    }
+                },
+                {
+                    id: 'james-bond',
+                    img: "photos/27178687-478e-456d-aa0a-18c8e749c6db.jpeg",
+                    title: language === 'ar' ? 'جولة جزيرة جيمس بوند' : 'James Bond Island Tour',
+                    description: language === 'ar' ? 'استكشف المواقع السينمائية الشهيرة' : 'Explore famous movie locations',
+                    trip: {
+                        category: 'adventure',
+                        image: "photos/27178687-478e-456d-aa0a-18c8e749c6db.jpeg",
+                        title: language === 'ar' ? 'جولة جزيرة جيمس بوند' : 'James Bond Island Tour',
+                        description: language === 'ar' 
+                            ? 'رحلة بالقارب السريع إلى جزيرة جيمس بوند الشهيرة، مع زيارة كهف Tham Lod والتجديف حول الصخور الجيرية' 
+                            : 'Speedboat trip to the famous James Bond Island, visit Tham Lod Cave, and canoe around limestone rocks',
+                        duration: "8 hours",
+                        startTime: "08:00",
+                        endTime: "16:00",
+                        groupType: language === 'ar' ? "مجموعة" : "Group",
+                        location: language === 'ar' ? "بوكيت" : "Phuket",
+                        activities: language === 'ar' ? [
+                            "رحلة بالقارب السريع إلى جزيرة جيمس بوند",
+                            "زيارة كهف Tham Lod",
+                            "التجديف حول الصخور الجيرية",
+                            "زيارة قرية Koh Panyee العائمة",
+                            "غداء تايلندي تقليدي",
+                            "وقت حر على الشاطئ"
+                        ] : [
+                            "Speedboat trip to James Bond Island",
+                            "Visit to Tham Lod Cave",
+                            "Canoeing around limestone rocks",
+                            "Visit to Koh Panyee floating village",
+                            "Traditional Thai lunch",
+                            "Free time on the beach"
+                        ],
+                        priceIncludes: language === 'ar'
+                            ? "النقل من وإلى الفندق، وجبة غداء، مرشد سياحي، معدات التجديف"
+                            : "Hotel transfers, Lunch, Tour guide, Canoeing equipment"
+                    }
+                },
+                {
+                    id: 'phi-phi',
+                    img: "photos/0f05103e-1b82-4ec0-806c-9e1131eee05e.jpeg",
+                    title: language === 'ar' ? 'جولة جزر في في' : 'Phi Phi Islands Tour',
+                    description: language === 'ar' ? 'استكشف الجزر الاستوائية الخلابة' : 'Explore stunning tropical islands',
+                    trip: {
+                        category: 'nature',
+                        image: "photos/0f05103e-1b82-4ec0-806c-9e1131eee05e.jpeg",
+                        title: language === 'ar' ? 'جولة جزر في في' : 'Phi Phi Islands Tour',
+                        description: language === 'ar' 
+                            ? 'رحلة بالقارب السريع إلى أرخبيل في في، زيارة Maya Bay الشهيرة، والسباحة في المياه الصافية' 
+                            : 'Speedboat trip to Phi Phi archipelago, visit famous Maya Bay, and swim in crystal clear waters',
+                        duration: "10 hours",
+                        startTime: "07:00",
+                        endTime: "17:00",
+                        groupType: language === 'ar' ? "مجموعة" : "Group",
+                        location: language === 'ar' ? "بوكيت" : "Phuket",
+                        activities: language === 'ar' ? [
+                            "رحلة بالقارب السريع إلى أرخبيل في في",
+                            "زيارة Maya Bay الشهيرة",
+                            "السباحة والغطس في Loh Samah Bay",
+                            "استكشاف Pileh Lagoon",
+                            "زيارة شاطئ القردة",
+                            "غداء في جزيرة Phi Phi Don"
+                        ] : [
+                            "Speedboat to Phi Phi archipelago",
+                            "Visit to famous Maya Bay",
+                            "Swimming & snorkeling at Loh Samah Bay",
+                            "Explore Pileh Lagoon",
+                            "Visit Monkey Beach",
+                            "Lunch at Phi Phi Don island"
+                        ],
+                        priceIncludes: language === 'ar'
+                            ? "النقل بالقارب السريع، الغداء، معدات الغطس، مرشد سياحي، المشروبات"
+                            : "Speedboat transfers, Lunch, Snorkeling equipment, Guide, Drinks"
+                    }
+                }
+            ];
+
+            const handleDestinationClick = (trip) => {
+                // Store the full trip data including details
+                const tripData = {
+                    ...trip,
+                    details: {
+                        description: trip.description,
+                        destinations: trip.destinations || [],
+                        schedule: trip.activities || []
+                    }
+                };
+                localStorage.setItem('selectedTrip', JSON.stringify(tripData));
+                window.location.href = 'trip-details.html';
+            };
+
+            React.useEffect(() => {
+                const swiper = new Swiper('.swiper-container', {
+                    slidesPerView: 1,
+                    spaceBetween: 30,
+                    loop: true,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 2,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                        },
+                    },
+                });
+
+                return () => {
+                    if (swiper) swiper.destroy();
+                };
+            }, []);
+
+            return (
+                <div className="py-16 bg-gray-800">
+                    <div className="container mx-auto px-4">
+                        <h2 className="text-3xl font-bold mb-8 text-center text-white">
+                            {translations.destinations}
+                        </h2>
+                        
+                        <div className="swiper-container">
+                            <div className="swiper-wrapper">
+                                {destinations.map((destination, index) => (
+                                    <div key={index} className="swiper-slide">
+                                        <div 
+                                            className="bg-gray-900 rounded-lg overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition-shadow"
+                                            onClick={() => handleDestinationClick(destination.trip)}
+                                        >
+                                            <img 
+                                                src={destination.img} 
+                                                alt={destination.title}
+                                                className="w-full h-48 object-cover"
+                                            />
+                                            <div className="p-6">
+                                                <h3 className="text-xl font-bold mb-2 text-white">{destination.title}</h3>
+                                                <p className="text-gray-300">{destination.description}</p>
+                                                <button 
+                                                    className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleDestinationClick(destination.trip);
+                                                    }}
+                                                >
+                                                    {language === 'ar' ? 'عرض المزيد' : 'View More'}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="swiper-pagination"></div>
+                            <div className="swiper-button-next"></div>
+                            <div className="swiper-button-prev"></div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const TravelPlanningSection = () => {
+            const { language } = React.useContext(LanguageContext);
+
+            return (
+                <div className="bg-black py-4 py-md-5">
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-12 col-md-8 mb-4 mb-md-0">
+                                <h2 className="display-4 text-white mb-4">
+                                    {language === 'ar' ? 'لا تريد أن تتعب نفسك بالتخطيط؟' : "Don't want to bother yourself with planning?"}
+                                </h2>
+                                <h3 className="text-2xl text-gray-300">
+                                    {language === 'ar'
+                                        ? 'هل تريد تجربة تايلند الحقيقية بعيداً عن السياح؟'
+                                        : 'Want to experience the real Thailand away from tourist traps?'}
+                                </h3>
+                                <p className="text-gray-400 text-lg">
+                                    {language === 'ar' 
+                                        ? 'مرحباً، أنا مصطفى. كمرشد سياحي محترف ومقيم في تا يلند، اكتشفت أجمل الأماكن السرية وأصبحت جزءاً من المجتمع المحلي.'
+                                        : 'Hi, I’m Mustafa. As a professional guide and Thailand resident, I’ve discovered the most beautiful hidden spots and become part of the local community.'}
+                                </p>
+                                <p className="text-gray-400 text-lg">
+                                    {language === 'ar'
+                                        ? 'من الشواطئ السرية في كرابي إلى أفضل المطاعم المحلية في بانكوك، ومن المعابد القديمة إلى أحدث الوجهات العصرية.'
+                                        : 'From secret beaches in Krabi to the best local eateries in Bangkok, from ancient temples to trendy hotspots.'}
+                                </p>
+                                <p className="text-gray-400 text-lg">
+                                    {language === 'ar'
+                                        ? 'دعني أصمم لك رحلة تناسب اهتماماتك وأسلوب سفرك، سواء كنت تبحث عن المغامرة أو الاسترخاء أو الثقافة.'
+                                        : 'Let me design a journey that matches your interests and travel style, whether you seek adventure, relaxation, or culture.'}
+                                </p>
+                                <p className="text-white italic">
+                                    {language === 'ar'
+                                        ? 'شعارنا: اصنع ذكريات لا تُنسى'
+                                        : 'Our motto: Create unforgettable memories'}
+                                </p>
+                                <button className="inline-flex items-center space-x-2 bg-white text-black px-8 py-3 rounded-full hover:bg-gray-200 transition-all duration-300">
+                                    <i className="fas fa-paper-plane"></i>
+                                    <span>
+                                        {language === 'ar' ? 'صمم رحلتك معنا' : 'Plan your journey'}
+                                    </span>
+                                </button>
+                            </div>
+
+                            {/* Expert Image */}
+                            <div className="col-12 col-md-4">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800" 
+                                    alt="Travel Expert"
+                                    className="img-fluid rounded-3"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const LuxuryStaysSection = () => {
+            const { language } = React.useContext(LanguageContext);
+            
+            const luxuryStays = [
+                {
+                    img: "https://images.unsplash.com/photo-1618773928121-c32242e63f39",
+                    title: language === 'ar' ? 'منازل الشجرة الفاخرة' : 'Luxury Tree Houses',
+                    description: language === 'ar' ? 'بين أشجار الغابات المطيرة' : 'Amid the rainforest canopy'
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1571896349842-33c89424de2d",
+                    title: language === 'ar' ? 'فيلات على الماء' : 'Overwater Villas',
+                    description: language === 'ar' ? 'مباشرة فوق المياه الفيروزية' : 'Directly over turquoise waters'
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1582610116397-edb318620f90",
+                    title: language === 'ar' ? 'أكواخ زجاجية' : 'Glass Pavilions',
+                    description: language === 'ar' ? 'إطلالات بانورامية 360 درجة' : '360° panoramic views'
+                },
+                {
+                    img: "https://images.unsplash.com/photo-1615571022219-eb45cf7faa9d",
+                    title: language === 'ar' ? 'منازل التلال' : 'Hillside Retreats',
+                    description: language === 'ar' ? 'خصوصية مطلقة مع إطلالات خلابة' : 'Ultimate privacy with stunning views'
+                }
+            ];
+
+            return (
+                <div className="bg-black py-20">
+                    <div className="container">
+                        <h2 className="text-3xl font-bold text-gray-400 mb-12 text-center">
+                            {language === 'ar' ? 'أقامات ستثنائية' : 'Extraordinary Stays'}
+                        </h2>
+
+                        {/* Luxury Stays Grid */}
+                        <div className="row g-4">
+                            {luxuryStays.map((stay, index) => (
+                                <div key={index} className="col-12 col-md-6 col-lg-3">
+                                    <div className="card bg-dark text-white h-100">
+                                        <div className="position-relative overflow-hidden" style={{height: '300px'}}>
+                                            <img 
+                                                src={stay.img} 
+                                                alt={stay.title}
+                                                className="w-100 h-100 object-fit-cover"
+                                            />
+                                            <div className="position-absolute bottom-0 start-0 w-100 p-3 bg-gradient-dark">
+                                                <h3 className="h5 mb-1">{stay.title}</h3>
+                                                <p className="small mb-0">{stay.description}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Book Button */}
+                        <div className="text-center mt-4">
+                            <button className="btn btn-light rounded-pill px-4 py-2">
+                                <i className="fas fa-home me-2"></i>
+                                {language === 'ar' ? 'احجز إقامتك' : 'Book your stay'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const SpecialOffers = () => {
+            const { language } = React.useContext(LanguageContext);
+            
+            const handleBookNow = (offer) => {
+                // Format the offer data to match the trip data structure
+                const tripData = {
+                    id: offer.id,
+                    title: offer.destination,
+                    image: offer.image,
+                    description: offer.itinerary.map(stop => 
+                        `${stop.city}: ${stop.hotel}, ${stop.dates}`
+                    ).join('\n'),
+                    duration: offer.dates,
+                    category: 'special-offer',
+                    groupType: language === 'ar' ? 'عرض خاص' : 'Special Offer',
+                    activities: offer.itinerary.map(stop => 
+                        `${stop.city} - ${stop.hotel} (${stop.dates})`
+                    ),
+                    destinations: offer.itinerary.map(stop => stop.city),
+                    price: offer.price
+                };
+
+                // Store the trip data
+                localStorage.setItem('selectedTrip', JSON.stringify(tripData));
+                
+                // Redirect to trip details page
+                window.location.href = 'trip-details.html';
+            };
+
+            const offers = [
+                {
+                    id: 1,
+                    destination: language === 'ar' ? 'تايلاند' : 'Thailand',
+                    dates: language === 'ar' ? '12-24 فبراير' : 'Feb 12-24',
+                    price: language === 'ar' ? '8200 شيكل' : '8200 ILS',
+                    itinerary: [
+                        {
+                            city: language === 'ar' ? 'بانكوك' : 'Bangkok',
+                            dates: language === 'ar' ? '12-16 فبراير' : 'Feb 12-16',
+                            hotel: 'Citadines Sukhumvit ⭐⭐⭐⭐',
+                            flight: language === 'ar' ? 'طيران الامارات' : 'Emirates Airlines'
+                        },
+                        {
+                            city: language === 'ar' ? 'كو ساموي' : 'Koh Samui',
+                            dates: language === 'ar' ? '16-20 فبراير' : 'Feb 16-20',
+                            hotel: 'Chaweng Noi Pool Villa ⭐⭐⭐⭐',
+                            flight: language === 'ar' ? 'طيران بانكوك' : 'Bangkok Airways'
+                        },
+                        {
+                            city: language === 'ar' ? 'بوكيت' : 'Phuket',
+                            dates: language === 'ar' ? '20-24 فبراير' : 'Feb 20-24',
+                            hotel: 'NH Boat Lagoon Phuket Resort ⭐⭐⭐⭐⭐',
+                            flight: language === 'ar' ? 'طيران الامارات' : 'Emirates Airlines'
+                        }
+                    ],
+                    image: 'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a'
+                },
+                {
+                    id: 2,
+                    destination: language === 'ar' ? 'بالي' : 'Bali',
+                    dates: language === 'ar' ? '1-10 مارس' : 'Mar 1-10',
+                    price: language === 'ar' ? '7999 شيكل' : '7999 ILS',
+                    itinerary: [
+                        {
+                            city: language === 'ar' ? 'أوبود' : 'Ubud',
+                            dates: language === 'ar' ? '1-5 مارس' : 'Mar 1-5',
+                            hotel: 'Hanging Gardens of Bali ⭐⭐⭐⭐⭐',
+                            flight: language === 'ar' ? 'طيران الاتحاد' : 'Etihad Airways'
+                        },
+                        {
+                            city: language === 'ar' ? 'سيمينياك' : 'Seminyak',
+                            dates: language === 'ar' ? '5-10 مارس' : 'Mar 5-10',
+                            hotel: 'W Bali ⭐⭐⭐⭐⭐',
+                            flight: language === 'ar' ? 'طيران داخلي' : 'Domestic Flight'
+                        }
+                    ],
+                    image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4'
+                },
+                {
+                    id: 3,
+                    destination: language === 'ar' ? 'المالديف' : 'Maldives',
+                    dates: language === 'ar' ? '15-22 مارس' : 'Mar 15-22',
+                    price: language === 'ar' ? '8999 شيكل' : '8999 ILS',
+                    itinerary: [
+                        {
+                            city: language === 'ar' ? 'جزر المالديف' : 'Maldives Islands',
+                            dates: language === 'ar' ? '15-22 مارس' : 'Mar 15-22',
+                            hotel: 'Conrad Maldives Rangali Island ⭐⭐⭐⭐⭐',
+                            flight: language === 'ar' ? 'طيران الإمارات' : 'Emirates Airlines'
+                        }
+                    ],
+                    image: 'https://images.unsplash.com/photo-1573843981267-be1999ff37cd'
+                }
+            ];
+
+            return (
+                <div className="py-16 bg-black">
+                    <div className="container mx-auto px-4">
+                        <h2 className="text-3xl font-bold mb-8 text-center text-white">
+                            {language === 'ar' ? 'عروض خاصة محدودة' : 'Limited Special Offers'}
+                        </h2>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {offers.map((offer) => (
+                                <div key={offer.id} className="bg-gray-900 rounded-lg overflow-hidden shadow-lg">
+                                    <img 
+                                        src={offer.image} 
+                                        alt={offer.destination}
+                                        className="w-full h-48 object-cover"
+                                    />
+                                    <div className="p-6">
+                                        <div className="flex justify-between items-center mb-4">
+                                            <h3 className="text-xl font-bold text-white">{offer.destination}</h3>
+                                            <span className="text-blue-400">✈️</span>
+                                        </div>
+                                        <div className="space-y-4">
+                                            <p className="text-gray-300">📅 {offer.dates}</p>
+                                            {offer.itinerary.map((stop, index) => (
+                                                <div key={index} className="border-t border-gray-800 pt-4">
+                                                    <p className="text-white font-bold">📍 {stop.city}</p>
+                                                    <p className="text-gray-400">🏨 {stop.hotel}</p>
+                                                    <p className="text-gray-400">✈️ {stop.flight}</p>
+                                                    <p className="text-gray-400">📅 {stop.dates}</p>
+                                                </div>
+                                            ))}
+                                            <div className="border-t border-gray-800 pt-4">
+                                                <p className="text-green-400 font-bold">💰 {offer.price}</p>
+                                            </div>
+                                        </div>
+                                        <button 
+                                            onClick={() => handleBookNow(offer)}
+                                            className="w-full mt-6 bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition-colors"
+                                        >
+                                            {language === 'ar' ? 'احجز الآن' : 'Book Now'}
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const MainLayout = () => {
+            return (
+                <div className="min-h-screen bg-black text-white">
+                    <Navbar />
+                    <WelcomePanel />
+                    <TravelOptions />
+                    <AboutSection />
+                    <DestinationsSection />
+                    <SpecialOffers />
+                    <TravelPlanningSection />
+                    <LuxuryStaysSection />
+                    <Footer />
+                </div>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            return (
+                <LanguageProvider>
+                    <MainLayout />
+                </LanguageProvider>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+    <!-- FinLit Widget Snippet -->
+<script>
+    (function(w,d,s,o,f,js,fjs){
+        w['FinLitWidget']=o;w[o]=w[o]||function(){
+        (w[o].q=w[o].q||[]).push(arguments)};
+        js=d.createElement(s),fjs=d.getElementsByTagName(s)[0];
+        js.id='finlit-widget';js.src=f;js.async=1;
+        fjs.parentNode.insertBefore(js,fjs);
+    }(window,document,'script','finlit','https://abedqwasmi.github.io/finlit-wed/widget-loader.js'));
+</script>
+
+</body>
+</html>
