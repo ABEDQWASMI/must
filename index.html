@@ -1270,16 +1270,16 @@
             ];
 
             return (
-                <div className="py-2">
-                    <h2 className="text-lg font-bold mb-2 text-center px-2">
+                <section className="w-full max-w-[95%] mx-auto px-2">
+                    <h2 className="text-base font-bold mb-2 text-center">
                         {language === 'ar' ? 'عروض خاصة محدودة' : 'Limited Special Offers'}
                     </h2>
                     
-                    <div className="card-container">
+                    <div className="space-y-2">
                         {offers.map((offer) => (
-                            <div key={offer.id} className="mb-2 bg-gray-900/50 backdrop-blur-sm rounded-lg overflow-hidden">
+                            <div key={offer.id} className="bg-gray-900/50 backdrop-blur-sm rounded-lg overflow-hidden">
                                 {/* Image and Price */}
-                                <div className="relative h-32">
+                                <div className="relative h-28">
                                     <img 
                                         src={offer.image} 
                                         alt={offer.destination}
@@ -1287,38 +1287,36 @@
                                         loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-                                    <div className="absolute top-1 right-1 bg-green-500/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full text-white text-[10px] font-medium">
+                                    <div className="absolute top-1.5 right-1.5 bg-green-500/90 backdrop-blur-sm px-2 py-0.5 rounded-full text-[10px] font-medium">
                                         {offer.price}
                                     </div>
                                     {/* Title overlay */}
-                                    <div className="absolute bottom-1 left-1 right-1">
+                                    <div className="absolute bottom-1.5 left-1.5 right-1.5">
                                         <h3 className="text-sm font-bold text-white text-truncate">
                                             {offer.destination}
                                         </h3>
-                                        <p className="text-white/90 text-[10px] flex items-center">
+                                        <p className="text-white/80 text-[10px] flex items-center">
                                             <span className="mr-1">📅</span> {offer.dates}
                                         </p>
                                     </div>
                                 </div>
 
                                 {/* Itinerary */}
-                                <div className="p-1.5">
-                                    <div className="space-y-1">
+                                <div className="p-2 bg-black/20">
+                                    <div className="grid grid-cols-2 gap-1.5">
                                         {offer.itinerary.map((stop, index) => (
-                                            <div key={index} className={`${index > 0 ? 'border-t border-gray-700/30 pt-1' : ''}`}>
-                                                <div className="flex gap-1">
-                                                    <span className="text-[10px] mt-0.5">📍</span>
-                                                    <div className="min-w-0 flex-1">
-                                                        <h4 className="text-white/90 font-medium text-[10px] text-truncate">
-                                                            {stop.city}
-                                                        </h4>
-                                                        <p className="text-white/60 text-[9px] text-truncate">
-                                                            {stop.hotel}
-                                                        </p>
-                                                        <p className="text-white/60 text-[9px] text-truncate">
-                                                            {stop.dates}
-                                                        </p>
-                                                    </div>
+                                            <div key={index} className="flex gap-1">
+                                                <span className="text-[10px] mt-0.5 text-blue-400">📍</span>
+                                                <div className="min-w-0">
+                                                    <p className="text-white/90 font-medium text-[10px] truncate">
+                                                        {stop.city}
+                                                    </p>
+                                                    <p className="text-white/60 text-[9px] truncate">
+                                                        {stop.hotel}
+                                                    </p>
+                                                    <p className="text-white/60 text-[9px]">
+                                                        {stop.dates}
+                                                    </p>
                                                 </div>
                                             </div>
                                         ))}
@@ -1326,7 +1324,7 @@
 
                                     <button 
                                         onClick={() => handleBookNow(offer)}
-                                        className="w-full mt-1.5 bg-blue-600/90 backdrop-blur-sm hover:bg-blue-600 text-white py-1 rounded text-[10px] font-medium transition-colors"
+                                        className="w-full mt-2 bg-blue-600/90 backdrop-blur-sm hover:bg-blue-600 text-white py-1.5 rounded-lg text-[10px] font-medium transition-colors"
                                     >
                                         {language === 'ar' ? 'احجز الآن' : 'Book Now'}
                                     </button>
@@ -1334,7 +1332,7 @@
                             </div>
                         ))}
                     </div>
-                </div>
+                </section>
             );
         };
 
