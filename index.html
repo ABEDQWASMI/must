@@ -1243,16 +1243,16 @@
             ];
 
             return (
-                <div className="py-3">
-                    <h2 className="text-lg font-bold mb-2 text-center">
+                <div className="py-2">
+                    <h2 className="text-lg font-bold mb-2 text-center px-2">
                         {language === 'ar' ? 'عروض خاصة محدودة' : 'Limited Special Offers'}
                     </h2>
                     
-                    <div className="px-1">
+                    <div className="card-container">
                         {offers.map((offer) => (
-                            <div key={offer.id} className="mb-2 bg-gray-900/50 backdrop-blur-sm rounded-lg overflow-hidden shadow-sm">
+                            <div key={offer.id} className="mb-2 bg-gray-900/50 backdrop-blur-sm rounded-lg overflow-hidden">
                                 {/* Image and Price */}
-                                <div className="relative h-36">
+                                <div className="relative h-32">
                                     <img 
                                         src={offer.image} 
                                         alt={offer.destination}
@@ -1260,12 +1260,12 @@
                                         loading="lazy"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent"></div>
-                                    <div className="absolute top-1.5 right-1.5 bg-green-500/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full text-white text-xs font-medium">
+                                    <div className="absolute top-1 right-1 bg-green-500/90 backdrop-blur-sm px-1.5 py-0.5 rounded-full text-white text-[10px] font-medium">
                                         {offer.price}
                                     </div>
                                     {/* Title overlay */}
-                                    <div className="absolute bottom-1.5 left-1.5 right-1.5">
-                                        <h3 className="text-sm font-bold text-white">
+                                    <div className="absolute bottom-1 left-1 right-1">
+                                        <h3 className="text-sm font-bold text-white text-truncate">
                                             {offer.destination}
                                         </h3>
                                         <p className="text-white/90 text-[10px] flex items-center">
@@ -1275,20 +1275,20 @@
                                 </div>
 
                                 {/* Itinerary */}
-                                <div className="p-2">
-                                    <div className="space-y-1.5">
+                                <div className="p-1.5">
+                                    <div className="space-y-1">
                                         {offer.itinerary.map((stop, index) => (
-                                            <div key={index} className={`${index > 0 ? 'border-t border-gray-700/30 pt-1.5' : ''}`}>
+                                            <div key={index} className={`${index > 0 ? 'border-t border-gray-700/30 pt-1' : ''}`}>
                                                 <div className="flex gap-1">
-                                                    <span className="text-xs mt-0.5">📍</span>
+                                                    <span className="text-[10px] mt-0.5">📍</span>
                                                     <div className="min-w-0 flex-1">
-                                                        <h4 className="text-white/90 font-medium text-[11px] truncate">
+                                                        <h4 className="text-white/90 font-medium text-[10px] text-truncate">
                                                             {stop.city}
                                                         </h4>
-                                                        <p className="text-white/60 text-[10px] truncate">
+                                                        <p className="text-white/60 text-[9px] text-truncate">
                                                             {stop.hotel}
                                                         </p>
-                                                        <p className="text-white/60 text-[10px]">
+                                                        <p className="text-white/60 text-[9px] text-truncate">
                                                             {stop.dates}
                                                         </p>
                                                     </div>
@@ -1299,7 +1299,7 @@
 
                                     <button 
                                         onClick={() => handleBookNow(offer)}
-                                        className="w-full mt-2 bg-blue-600/90 backdrop-blur-sm hover:bg-blue-600 text-white py-1.5 rounded-md text-xs font-medium transition-colors"
+                                        className="w-full mt-1.5 bg-blue-600/90 backdrop-blur-sm hover:bg-blue-600 text-white py-1 rounded text-[10px] font-medium transition-colors"
                                     >
                                         {language === 'ar' ? 'احجز الآن' : 'Book Now'}
                                     </button>
