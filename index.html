@@ -34,9 +34,10 @@
 
         /* Mobile container */
         .mobile-container {
-            max-width: 100%;
+            width: 95%;
+            max-width: 95%;
             margin: 0 auto;
-            padding: 0 16px;
+            padding: 0;
         }
 
         /* Bottom Navigation */
@@ -298,6 +299,49 @@
             to {
                 transform: translateY(0);
                 opacity: 1;
+            }
+        }
+
+        /* Add these utility classes */
+        .max-w-95 {
+            max-width: 95%;
+        }
+
+        .text-small {
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .text-smaller {
+            font-size: 12px;
+            line-height: 1.3;
+        }
+
+        /* Prevent text overflow */
+        .text-wrap {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            -ms-word-break: break-all;
+            word-break: break-word;
+            -ms-hyphens: auto;
+            -moz-hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+        }
+
+        /* Optimize for very small screens */
+        @media (max-width: 320px) {
+            .mobile-container {
+                width: 98%;
+                max-width: 98%;
+            }
+            
+            .text-small {
+                font-size: 12px;
+            }
+            
+            .text-smaller {
+                font-size: 11px;
             }
         }
     </style>
@@ -1023,43 +1067,40 @@
             const { language } = React.useContext(LanguageContext);
 
             return (
-                <div className="content-wrapper py-4">
-                    <div className="px-4">
-                        <h2 className="text-2xl font-bold mb-4">
+                <section className="w-full max-w-[95%] mx-auto px-2"> {/* Narrower container */}
+                    <div className="bg-gray-900/50 rounded-lg p-3 backdrop-blur-sm">
+                        <h2 className="text-base font-bold mb-2">
                             {language === 'ar' ? 'لا تريد أن تتعب نفسك بالتخطيط؟' : "Don't want to bother yourself with planning?"}
                         </h2>
-                        <div className="space-y-4">
-                            <h3 className="text-lg text-gray-300">
+                        
+                        <div className="space-y-2 text-[13px] leading-snug text-gray-300">
+                            <p>
                                 {language === 'ar'
                                     ? 'هل تريد تجربة تايلند الحقيقية بعيداً عن السياح؟'
                                     : 'Want to experience the real Thailand away from tourist traps?'}
-                            </h3>
-                            <p className="text-gray-400">
+                            </p>
+                            <p>
                                 {language === 'ar' 
-                                    ? 'مرحباً، أنا مصطفى. كمرشد سياحي محترف ومقيم في تايلند، اكتشفت أجمل الأماكن السرية وأصبحت جزءاً من المجتمع المحلي.'
-                                    : 'Hi, Im Mustafa. As a professional guide and Thailand resident, Ive discovered the most beautiful hidden spots and become part of the local community.'}
+                                    ? 'مرحباً، أنا مصطفى. كمرشد سياحي محترف ومقيم في تايلند.'
+                                    : 'Hi, Im Mustafa. As a professional guide and Thailand resident.'}
                             </p>
-                            <p className="text-gray-400">
+                            <p>
                                 {language === 'ar'
-                                    ? 'من الشواطئ السرية في كرابي إلى أفضل المطاعم المحلية في بانكوك، ومن المعابد القديمة إلى أحدث الوجهات العصرية.'
-                                    : 'From secret beaches in Krabi to the best local eateries in Bangkok, from ancient temples to trendy hotspots.'}
+                                    ? 'من الشواطئ السرية في كرابي إلى أفضل المطاعم المحلية.'
+                                    : 'From secret beaches in Krabi to the best local eateries.'}
                             </p>
-                            <p className="text-gray-400">
-                                {language === 'ar'
-                                    ? 'سنصمم رحلة تناسب اهتماماتك وأسلوبك، سواء كنت تبحث عن المغامرة أو الاسترخاء أو الثقافة.'
-                                    : 'Well design a journey that matches your interests and style, whether you seek adventure, relaxation, or culture.'}
-                            </p>
-                            <p className="text-gray-400 italic">
+                            <p className="italic text-[12px] text-gray-400">
                                 {language === 'ar'
                                     ? 'شعارنا: صنع ذكريات لا تُنسى'
                                     : 'Motto: Create unforgettable memories'}
                             </p>
                         </div>
-                        <button className="mt-6 bg-blue-600 text-white px-8 py-3 rounded-full text-sm font-medium">
+
+                        <button className="w-full mt-3 bg-blue-600/90 text-white py-2 rounded-lg text-sm font-medium">
                             {language === 'ar' ? 'خطط رحلتك' : 'Plan your journey'}
                         </button>
                     </div>
-                </div>
+                </section>
             );
         };
 
