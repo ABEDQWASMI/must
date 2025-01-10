@@ -1023,55 +1023,41 @@
             const { language } = React.useContext(LanguageContext);
 
             return (
-                <div className="bg-black py-4 py-md-5">
-                    <div className="container">
-                        <div className="row align-items-center">
-                            <div className="col-12 col-md-8 mb-4 mb-md-0">
-                                <h2 className="display-4 text-white mb-4">
-                                    {language === 'ar' ? 'لا تريد أن تتعب نفسك بالتخطيط؟' : "Don't want to bother yourself with planning?"}
-                                </h2>
-                                <h3 className="text-2xl text-gray-300">
-                                    {language === 'ar'
-                                        ? 'هل تريد تجربة تايلند الحقيقية بعيداً عن السياح؟'
-                                        : 'Want to experience the real Thailand away from tourist traps?'}
-                                </h3>
-                                <p className="text-gray-400 text-lg">
-                                    {language === 'ar' 
-                                        ? 'مرحباً، أنا مصطفى. كمرشد سياحي محترف ومقيم في تا يلند، اكتشفت أجمل الأماكن السرية وأصبحت جزءاً من المجتمع المحلي.'
-                                        : 'Hi, I’m Mustafa. As a professional guide and Thailand resident, I’ve discovered the most beautiful hidden spots and become part of the local community.'}
-                                </p>
-                                <p className="text-gray-400 text-lg">
-                                    {language === 'ar'
-                                        ? 'من الشواطئ السرية في كرابي إلى أفضل المطاعم المحلية في بانكوك، ومن المعابد القديمة إلى أحدث الوجهات العصرية.'
-                                        : 'From secret beaches in Krabi to the best local eateries in Bangkok, from ancient temples to trendy hotspots.'}
-                                </p>
-                                <p className="text-gray-400 text-lg">
-                                    {language === 'ar'
-                                        ? 'دعني أصمم لك رحلة تناسب اهتماماتك وأسلوب سفرك، سواء كنت تبحث عن المغامرة أو الاسترخاء أو الثقافة.'
-                                        : 'Let me design a journey that matches your interests and travel style, whether you seek adventure, relaxation, or culture.'}
-                                </p>
-                                <p className="text-white italic">
-                                    {language === 'ar'
-                                        ? 'شعارنا: اصنع ذكريات لا تُنسى'
-                                        : 'Our motto: Create unforgettable memories'}
-                                </p>
-                                <button className="inline-flex items-center space-x-2 bg-white text-black px-8 py-3 rounded-full hover:bg-gray-200 transition-all duration-300">
-                                    <i className="fas fa-paper-plane"></i>
-                                    <span>
-                                        {language === 'ar' ? 'صمم رحلتك معنا' : 'Plan your journey'}
-                                    </span>
-                                </button>
-                            </div>
-
-                            {/* Expert Image */}
-                            <div className="col-12 col-md-4">
-                                <img 
-                                    src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800" 
-                                    alt="Travel Expert"
-                                    className="img-fluid rounded-3"
-                                />
-                            </div>
+                <div className="content-wrapper py-4">
+                    <div className="px-4">
+                        <h2 className="text-2xl font-bold mb-4">
+                            {language === 'ar' ? 'لا تريد أن تتعب نفسك بالتخطيط؟' : "Don't want to bother yourself with planning?"}
+                        </h2>
+                        <div className="space-y-4">
+                            <h3 className="text-lg text-gray-300">
+                                {language === 'ar'
+                                    ? 'هل تريد تجربة تايلند الحقيقية بعيداً عن السياح؟'
+                                    : 'Want to experience the real Thailand away from tourist traps?'}
+                            </h3>
+                            <p className="text-gray-400">
+                                {language === 'ar' 
+                                    ? 'مرحباً، أنا مصطفى. كمرشد سياحي محترف ومقيم في تايلند، اكتشفت أجمل الأماكن السرية وأصبحت جزءاً من المجتمع المحلي.'
+                                    : 'Hi, Im Mustafa. As a professional guide and Thailand resident, Ive discovered the most beautiful hidden spots and become part of the local community.'}
+                            </p>
+                            <p className="text-gray-400">
+                                {language === 'ar'
+                                    ? 'من الشواطئ السرية في كرابي إلى أفضل المطاعم المحلية في بانكوك، ومن المعابد القديمة إلى أحدث الوجهات العصرية.'
+                                    : 'From secret beaches in Krabi to the best local eateries in Bangkok, from ancient temples to trendy hotspots.'}
+                            </p>
+                            <p className="text-gray-400">
+                                {language === 'ar'
+                                    ? 'سنصمم رحلة تناسب اهتماماتك وأسلوبك، سواء كنت تبحث عن المغامرة أو الاسترخاء أو الثقافة.'
+                                    : 'Well design a journey that matches your interests and style, whether you seek adventure, relaxation, or culture.'}
+                            </p>
+                            <p className="text-gray-400 italic">
+                                {language === 'ar'
+                                    ? 'شعارنا: صنع ذكريات لا تُنسى'
+                                    : 'Motto: Create unforgettable memories'}
+                            </p>
                         </div>
+                        <button className="mt-6 bg-blue-600 text-white px-8 py-3 rounded-full text-sm font-medium">
+                            {language === 'ar' ? 'خطط رحلتك' : 'Plan your journey'}
+                        </button>
                     </div>
                 </div>
             );
